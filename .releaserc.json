@@ -1,0 +1,42 @@
+{
+  "branches": ["main", "master"],
+  "tagFormat": "v${version}",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "node scripts/update-version.mjs ${nextRelease.version} && cargo build --release && tar -C target/release -czf snitch-fw-x86_64-unknown-linux-gnu.tar.gz snitch-fw && sha256sum snitch-fw-x86_64-unknown-linux-gnu.tar.gz > snitch-fw-x86_64-unknown-linux-gnu.tar.gz.sha256"
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["Cargo.toml", "Cargo.lock", "CHANGELOG.md"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "snitch-fw-x86_64-unknown-linux-gnu.tar.gz",
+            "label": "Linux x86_64 binary"
+          },
+          {
+            "path": "snitch-fw-x86_64-unknown-linux-gnu.tar.gz.sha256",
+            "label": "Linux x86_64 checksum"
+          }
+        ]
+      }
+    ]
+  ]
+}
