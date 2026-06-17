@@ -1,3 +1,10 @@
+# 1.0.0 (2026-06-17)
+
+
+### Features
+
+* Initial commit ([30ce24e](https://github.com/Flaykz/snitch-fw/commit/30ce24ec6516b2b62bb8578c6dabb711bb661508))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.

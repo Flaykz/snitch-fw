@@ -1,6 +1,6 @@
 [package]
 name = "snitch-fw"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2024"
 description = "Linux host TUI that correlates listening sockets with firewall and Docker signals"
 license = "MIT"
